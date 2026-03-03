@@ -43,6 +43,59 @@ body {
   overflow-x: hidden;
 }
 
+/* Link Styles for Project Accordion Content */
+.accordion-content a {
+  color: var(--cosmic-pink);
+  text-decoration: underline;
+  text-decoration-color: var(--cosmic-pink);
+}
+
+.accordion-content a:hover {
+  color: var(--cosmic-pink);
+  text-decoration: underline;
+  text-decoration-color: var(--cosmic-pink);
+}
+
+.accordion-content a:visited {
+  color: var(--cosmic-pink);
+  text-decoration: underline;
+  text-decoration-color: var(--cosmic-pink);
+}
+
+.social-sidebar {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 100;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(111, 212, 255, 0.1);
+  border: 1px solid rgba(111, 212, 255, 0.3);
+  border-radius: 50%;
+  color: var(--light-sky-blue);
+  font-size: 1.2rem;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: rgba(111, 212, 255, 0.2);
+  border-color: var(--light-sky-blue);
+  color: var(--off-white);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(111, 212, 255, 0.3);
+}
+
 /* Starfield Background */
 .starfield {
   position: fixed;
@@ -244,6 +297,7 @@ body {
 .hero-title {
   font-family: var(--font-primary);
   font-size: clamp(3rem, 8vw, 6rem);
+  color: white;
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.1;
@@ -251,16 +305,7 @@ body {
 
 .title-line {
   display: block;
-  background: linear-gradient(
-    135deg,
-    var(--light-sky-blue),
-    var(--stellar-indigo)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-  animation: titleGlow 3s ease-in-out infinite alternate;
+  color: white;
 }
 
 @keyframes titleGlow {
@@ -587,6 +632,12 @@ section {
   position: relative;
 }
 
+/* Make MySQL logo bigger */
+.skill-item:has(img[alt="MySQL"]) .skill-icon img {
+  width: 45px;
+  height: 45px;
+}
+
 .skill-item span {
   font-family: var(--font-primary);
   font-weight: 600;
@@ -738,11 +789,6 @@ section {
   transition: var(--transition-smooth);
 }
 
-.work-responsibilities li:hover {
-  background: rgba(111, 212, 255, 0.1);
-  transform: translateX(10px);
-}
-
 .work-responsibilities i {
   color: var(--light-sky-blue);
   margin-top: 0.25rem;
@@ -865,7 +911,7 @@ section {
 
 .project-details li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
@@ -874,16 +920,56 @@ section {
   transition: var(--transition-smooth);
 }
 
-.project-details li:hover {
-  background: rgba(111, 212, 255, 0.1);
-  transform: translateX(10px);
-}
-
 .project-details li::before {
   content: "";
   color: var(--light-sky-blue);
   margin-top: 0.25rem;
   flex-shrink: 0;
+}
+
+/* Project Links and Accordion */
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.accordion {
+  background: rgba(111, 212, 255, 0.05);
+  border: 1px solid rgba(111, 212, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease;
+}
+
+.accordion .accordion-content {
+  padding: 0 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease, padding 0.3s ease;
+}
+
+.accordion.open {
+  max-height: 2000px;
+}
+
+.accordion.open .accordion-content {
+  padding: 1rem;
+  opacity: 1;
+}
+
+.accordion h3,
+.accordion h4 {
+  color: var(--light-sky-blue);
+  margin: 0.5rem 0;
+}
+
+.accordion p,
+.accordion li {
+  color: var(--off-white);
+  opacity: 0.95;
 }
 
 .tech-stack {
@@ -904,7 +990,7 @@ section {
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: linear-gradient(
     135deg,
     var(--light-sky-blue),
@@ -912,10 +998,11 @@ section {
   );
   color: var(--eclipse-black);
   text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
   font-family: var(--font-primary);
   font-weight: 600;
+  font-size: 0.85rem;
   transition: var(--transition-bounce);
   border: none;
   cursor: pointer;
@@ -935,6 +1022,10 @@ section {
 .btn-secondary.disabled:hover {
   transform: none;
   box-shadow: none;
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
 }
 
 /* Footer */
@@ -967,10 +1058,6 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .bowling-animation {
-    display: none;
-  }
-
   .nav-menu {
     position: fixed;
     top: 70px;

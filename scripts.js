@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initParallax();
   initFrostRipple();
   initNebulaParticles();
-  initTypewriter();
+  // initTypewriter();
 
   // Navigation functionality
   function initNavigation() {
@@ -314,6 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initWorkCardEffects();
   initInterestItemEffects();
   initImageCarousels();
+  initAccordions();
 
   // Image carousel functionality
   function initImageCarousels() {
@@ -351,6 +352,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Auto-advance carousel every 5 seconds
       setInterval(nextImage, 5000);
+    });
+  }
+
+  // Accordion functionality for project details
+  function initAccordions() {
+    const toggles = document.querySelectorAll(".accordion-toggle");
+
+    toggles.forEach((toggle) => {
+      toggle.setAttribute("aria-expanded", "false");
+
+      // Initialize accordion icon rotation
+      const icon = toggle.querySelector(".accordion-icon");
+      if (icon) {
+        icon.style.transform = "rotate(0deg)";
+      }
+
+      toggle.addEventListener("click", function () {
+        const targetId = this.getAttribute("data-target");
+        if (!targetId) return;
+
+        const accordion = document.querySelector(targetId);
+        if (!accordion) return;
+
+        const willOpen = !accordion.classList.contains("open");
+        accordion.classList.toggle("open", willOpen);
+        this.setAttribute("aria-expanded", String(willOpen));
+
+        // Rotate the accordion icon
+        const icon = this.querySelector(".accordion-icon");
+        if (icon) {
+          icon.style.transform = willOpen ? "rotate(180deg)" : "rotate(0deg)";
+        }
+      });
     });
   }
 
